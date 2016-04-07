@@ -1,0 +1,74 @@
+﻿@using Laurids_Vestergaard.Models.BaseModels;
+@model List<Laurids_Vestergaard.Models.BaseModels.Galleries>
+
+@{
+    ViewBag.Title = "Gallery";
+}
+
+<h2>Gallery</h2>
+
+<div class="col-lg-4">
+    @foreach (var gallery in Model)
+    {
+        <div style="width:80%; float:left;">
+            <form action="/Admin/Admin/GetGallery/@gallery.GalleryID" method="post">
+                <input type="submit" value="@gallery.Title" class="form-control" />
+            </form>
+        </div>
+        <div style="width:20%; float:left;">
+            <form action="/Admin/Admin/DeleteGallery/@gallery.GalleryID" method="post">
+                <input type="submit" value="Delete" class="form-control" />
+            </form>
+        </div>
+    }
+    <form action="/Admin/Admin/AddGallery" method="get">
+        <input type="submit" value="Add Gallery" class="form-control" />
+    </form>
+</div>
+<div class="col-lg-8">
+    @if (TempData["GalleryList"] != null)
+    {
+        List<GalleryItems> galleryList = TempData["GalleryList"] as List<GalleryItems>;
+        if ((TempData["GalleryList"] as List<GalleryItems>).Count > 0)
+        {
+            foreach (GalleryItems galleryItem in galleryList)
+            {
+                <table class="galleryListItem">
+                    <tr>
+                        <th class="text-center text-capitalize">
+                            @galleryItem.Name
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="~/Content/Images/Gallery/@galleryItem.Image" class="img-responsive img-thumbnail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="/Admin/Admin/DeleteGalleryItem/@galleryItem.GalleryItemID" class="form-control" onclick="return confirm('Are you sure you wish to delete this article?');">Delete</a>
+                            <a href="/Admin/Admin/EditGalleryItem/@galleryItem.GalleryItemID" class="form-control">Edit</a>
+                        </td>
+                    </tr>
+                </table>
+            }
+        }
+        <a href="/Admin/Admin/AddGalleryItem/@TempData["GalleryID"]">
+            <table class="galleryListItem">
+                <tr>
+                    <th class="text-center text-capitalize">
+                        Add GalleryItem
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="~/Content/Images/Layout/AddImage.png" class="img-responsive img-thumbnail" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center"></td>
+                </tr>
+            </table>
+        </a>
+    }
+</div>

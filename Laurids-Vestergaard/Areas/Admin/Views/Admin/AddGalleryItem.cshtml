@@ -1,0 +1,55 @@
+﻿@using Laurids_Vestergaard.Models.BaseModels
+@model Laurids_Vestergaard.Models.BaseModels.GalleryItems
+
+@{
+    ViewBag.Title = "AddGalleryItem";
+}
+
+<h2>AddGalleryItem</h2>
+
+@using (Html.BeginForm("AddGalleryItem", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal">
+        <h4>GalleryItem</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GalleryID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label>@((TempData["Gallery"] as Galleries).Title)</label>
+                @Html.HiddenFor(model => ((TempData["Gallery"] as Galleries).GalleryID))
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateAdded, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label for="DateAdded">@DateTime.Now.Date.ToString("dd/MM/yyyy")</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Gallery")
+</div>

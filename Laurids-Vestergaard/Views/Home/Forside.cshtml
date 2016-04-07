@@ -1,0 +1,13 @@
+﻿@using Laurids_Vestergaard.Models.BaseModels;
+@model Homes
+@{
+    ViewBag.Title = "Din Lokale Maler - Malermester Laurids Vestergaard";
+}
+
+@section AddToHead {
+    <meta name="description=" content="Hos Malermester Laurids Vestergaard kan du altid få et uforpligtende tilbud til dine maler opgaver" />
+}
+
+<div class="col-lg-12">
+    @Html.Raw(Model.Text)
+</div>

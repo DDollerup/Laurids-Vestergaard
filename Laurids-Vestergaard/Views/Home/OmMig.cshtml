@@ -1,0 +1,16 @@
+﻿@using Laurids_Vestergaard.Models.BaseModels;
+@model Abouts
+
+@{
+    ViewBag.Title = "Om Mig";
+}
+
+@section AddToHead{
+    <meta name="description=" content="Mit fokus ligger i at guide minde kunder bedst muligt, for det bedst mulige resultat" />
+}
+<div class="col-md-8">
+    @Html.Raw(Model.Text)
+</div>
+<div class="col-md-4">
+    <img src="~/Content/Images/About/@Model.Image" class="img-responsive img-thumbnail" />
+</div>

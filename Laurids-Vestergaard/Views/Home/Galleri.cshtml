@@ -1,0 +1,57 @@
+﻿@using Laurids_Vestergaard.Models.ViewModels
+@model List<GalleryListItem>
+
+
+@{
+    ViewBag.Title = "Galleri";
+}
+
+@section AddToHead{
+    <meta name="description=" content="I mit galleri kan du eksempler på mine tidligere opgaver, så du selv kan se kvaliteten af mit arbejde" />
+}
+@{
+    GalleryListItem newestElement = Model.LastOrDefault();
+}
+<div class="col-xs-12">
+    <div class="row">
+        <div class="col-md-7">
+            <p>
+                I mit galleri kan du finde inspiration til <strong>dit</strong> næste malerprojekt.
+            </p>
+        </div>
+        <div class="col-md-5">
+
+            <a href="/Home/VisGalleri/@newestElement.Gallery.GalleryID">
+                <div id="galleryNewestElement">
+                    <div>
+                        @newestElement.Gallery.Title
+                    </div>
+                    <div>
+                        <img src="~/Content/Images/Gallery/@("tn_" + newestElement.GalleryItem.Image)" />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12" style="margin:5px 0 5px 0;"></div>
+<div class="col-xs-12">
+    <div class="row">
+        @foreach (GalleryListItem gallery in Model)
+        {
+            if (gallery.Gallery.GalleryID == newestElement.Gallery.GalleryID) { continue; }
+            <div class="col-sm-3" style="margin-bottom:7px;">
+                <a href="/Home/VisGalleri/@gallery.Gallery.GalleryID">
+                    <div class="galleryElement">
+                        <div>
+                            @gallery.Gallery.Title
+                        </div>
+                        <div>
+                            <img src="~/Content/Images/Gallery/@("tn_" + gallery.GalleryItem.Image)" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

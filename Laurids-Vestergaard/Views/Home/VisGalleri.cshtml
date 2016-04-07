@@ -1,0 +1,40 @@
+﻿@using Laurids_Vestergaard.Models.BaseModels;
+@model List<GalleryItems>
+
+@{
+    ViewBag.Title = "Se Galleri: " + ViewBag.GalleryTitle;
+}
+
+<a href="/Home/Galleri" style="text-decoration:none;">
+    <h4>
+        Tilbage
+    </h4>
+</a>
+
+<link href="~/Content/fancybox/jquery.fancybox.css" rel="stylesheet" />
+
+@foreach (GalleryItems galleryItem in Model)
+{
+    <div class="col-sm-3" style="margin-bottom:7px;">
+        <div class="galleryElement">
+            <div>
+                @galleryItem.Name
+            </div>
+            <div>
+                <a class="gallerySlider" rel="group" href="~/Content/Images/Gallery/@galleryItem.Image">
+                    <img src="~/Content/Images/Gallery/@("tn_" + galleryItem.Image)" />
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section AddToButtomHTML
+{
+    <script src="~/Content/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("a.gallerySlider").fancybox();
+        })
+    </script>
+}
